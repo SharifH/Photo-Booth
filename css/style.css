@@ -1,3 +1,7 @@
+@font-face{
+    font-family:SummerSunshine;
+    src: url(../fonts/KGSummerSunshineBlackout.tff);
+}
 html {
     background: #111111;
     height: 100%;
@@ -13,6 +17,11 @@ video, img, #startbutton {
     border-radius: 10px;
 
 }
+#count_num{
+    font-family: SummerSunshine;
+    vertical-align: middle;
+    color: red;
+}
 #startbutton {
     background: green;
     border: none;
@@ -27,6 +36,8 @@ video, img, #startbutton {
     margin: 20px auto;
 }
 #video{
-    height: 600px;
+    height: 560px;
     width:750px;
 }
+
+
