@@ -16,7 +16,7 @@
     var streaming = false,
         video = document.querySelector('#video'),
         cover = document.querySelector('#cover'),
-        canvas = document.querySelector('#canvas'),
+        canvas = document.querySelector('#iframe'),
         photo = document.querySelector('#photo'),
         startbutton = document.querySelector('#startbutton'),
         width = 200,

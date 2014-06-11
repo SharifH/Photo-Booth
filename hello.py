@@ -7,7 +7,9 @@ def hello_world():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-  print request.files
+  from IPython import embed;
+  embed()
+  print request
 
 if __name__ == '__main__':
     app.debug = True
