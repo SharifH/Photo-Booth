@@ -2,17 +2,22 @@
 
 <head>
    <link rel="stylesheet" href="css/style.css">
+   <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js"></script>
 </head>
 
 <body>
-
+<div id="webcam">
 <video id="video"></video>
 <span id="count_num">3</span>
-
 <button id="startbutton">Take photo</button>
+</div>
+
+
+<div>
 <canvas id="canvas"></canvas>
 <img src="http://placekitten.com/g/200/150" id="photo" alt="photo">
-
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 
