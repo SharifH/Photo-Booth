@@ -1,16 +1,16 @@
 (function() {
 
-  var guid = (function() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-               .toString(16)
-               .substring(1);
-  }
-  return function() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-           s4() + '-' + s4() + s4() + s4();
-  };
-})();
+    var guid = (function() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return function() {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        };
+    })();
 
 
     var streaming = false,
@@ -56,19 +56,54 @@
         }
     }, false);
 
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: 'image/jpeg' });
+    };
+
     function takepicture() {
+        var data,
+            postOBj,
+            fd;
+
         console.log("Picture being taken.");
         canvas.width = width;
         canvas.height = height;
         canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-        var data = canvas.toDataURL('image/png');
+
+        // Converting picture to the little frame
+        data = canvas.toDataURL('image/png');
         photo.setAttribute('src', data);
-        //ajax post photo ('file', data);
-        console.log('posting image');
-        var image = new Image;
-        image.src = data;
-        //$.post( "/upload", { 'file': data } );
-    }
+
+        // Upload the photo
+
+        postObj = dataURItoBlob(data);
+        fd = new FormData();
+
+        fd.append("file", postObj);
+        debugger
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+
+            },
+            error: function() {
+
+
+            }
+        });
+    };
 
     var timeoutId;
     startbutton.addEventListener('click', function(ev) {
@@ -77,7 +112,7 @@
         var pictureTime = Math.floor((Math.random() * 3) + 1);
 
         if (timeoutId) window.clearTimeout(timeoutId);
-        var timeoutId = window.setTimeout(takepicture, pictureTime*1000);
+        var timeoutId = window.setTimeout(takepicture, pictureTime * 1000);
 
         var timer = setInterval(function() {
             $("#count_num").html(function(i, html) {
@@ -95,5 +130,3 @@
     }, false);
 
 })();
-
-
