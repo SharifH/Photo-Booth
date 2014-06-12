@@ -14,7 +14,7 @@ def upload_file():
     try:
         image_string = re.search(r'base64,(.*)', request.data).group(1)
   
-        output = open(str(uuid.uuid4()) + '.png', 'wb')
+        output = open('pics/' + str(uuid.uuid4()) + '.png', 'wb')
         output.write(image_string.decode('base64'))
         output.close()
     except Exception as e:
