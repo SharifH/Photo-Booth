@@ -1,5 +1,9 @@
-from flask import Flask, request
+import re
+import uuid
+from flask import Flask, request, jsonify
+
 app = Flask(__name__, static_url_path='')
+
 
 @app.route('/')
 def hello_world():
@@ -7,9 +11,16 @@ def hello_world():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-  from IPython import embed;
-  embed()
-  print request
+    try:
+        image_string = re.search(r'base64,(.*)', request.data).group(1)
+  
+        output = open(str(uuid.uuid4()) + '.png', 'wb')
+        output.write(image_string.decode('base64'))
+        output.close()
+    except Exception as e:
+        pass
+
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.debug = True

@@ -77,29 +77,17 @@
         canvas.height = height;
         canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 
-        // Converting picture to the little frame
         data = canvas.toDataURL('image/png');
         photo.setAttribute('src', data);
 
 
-        // Upload the photo
-        postObj = dataURItoBlob(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST','/upload');
+        xhr.send(data);
 
-        var oReq = new XMLHttpRequest();
-        var reader = new FileReader();
-
-        oReq.onload = function (oEvent) {
+        xhr.onload = function (oEvent) {
           // Uploaded.
         };
-
-        reader.onload = function(e) {
-          var rawData = reader.result;
-          oReq.open("POST", '/upload', true);
-          oReq.send(rawData);
-          debugger
-        }
-
-        reader.readAsBinaryString(postObj);
     };
 
     var timeoutId;
