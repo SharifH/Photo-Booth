@@ -10,7 +10,7 @@ html {
 iframe {
     display: none;
 }
-video, img, #startbutton {
+video, canvas, img, #startbutton {
     display: block;
     float: left;
     border: 10px solid #fff;

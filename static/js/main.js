@@ -16,7 +16,7 @@
     var streaming = false,
         video = document.querySelector('#video'),
         cover = document.querySelector('#cover'),
-        canvas = document.querySelector('#iframe'),
+        canvas = document.querySelector('#canvas'),
         photo = document.querySelector('#photo'),
         startbutton = document.querySelector('#startbutton'),
         width = 200,
@@ -81,28 +81,25 @@
         data = canvas.toDataURL('image/png');
         photo.setAttribute('src', data);
 
+
         // Upload the photo
-
         postObj = dataURItoBlob(data);
-        fd = new FormData();
 
-        fd.append("file", postObj);
-        debugger
+        var oReq = new XMLHttpRequest();
+        var reader = new FileReader();
 
-        $.ajax({
-            url: '/upload',
-            type: 'POST',
-            data: fd,
-            contentType: false,
-            processData: false,
-            success: function(data) {
+        oReq.onload = function (oEvent) {
+          // Uploaded.
+        };
 
-            },
-            error: function() {
+        reader.onload = function(e) {
+          var rawData = reader.result;
+          oReq.open("POST", '/upload', true);
+          oReq.send(rawData);
+          debugger
+        }
 
-
-            }
-        });
+        reader.readAsBinaryString(postObj);
     };
 
     var timeoutId;
