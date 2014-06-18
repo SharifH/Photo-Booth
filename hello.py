@@ -31,6 +31,7 @@ def upload_file():
         output.write(image_string.decode('base64'))
         output.close()
 
+        f = open(file_name, 'rb')
         response = client.put_file(file_name, f)
     except Exception as e:
         print e
