@@ -1,4 +1,4 @@
-# import dropbox
+import dropbox
 import re
 import uuid
 from flask import Flask, request, jsonify, session, redirect, url_for
@@ -21,11 +21,17 @@ def hello_world():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     try:
+        client = dropbox.client.DropboxClient(session['access_token'])
+
         image_string = re.search(r'base64,(.*)', request.data).group(1)
 
-        output = open('pics/' + str(uuid.uuid4()) + '.png', 'wb')
+        file_name = 'pics/' + str(uuid.uuid4()) + '.png'
+
+        output = open(file_name, 'wb')
         output.write(image_string.decode('base64'))
         output.close()
+
+        response = client.put_file(file_name, f)
     except Exception as e:
         print e
         pass
