@@ -1,11 +1,11 @@
-@font-face{
-    font-family:SummerSunshine;
-    src: url(../fonts/KGSummerSunshineBlackout.tff);
-}
 html {
-    background: #111111;
     height: 100%;
-    background: linear-gradient( #333, #000);
+    background: linear-gradient( #340a22, #0d1833);
+}
+body{
+    background-image: url(../img/rustic.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 iframe {
     display: none;
@@ -17,18 +17,32 @@ video, canvas, img, #startbutton {
     border-radius: 10px;
 
 }
+#webcam{
+    width: 100%;
+    height: 100%;
+}
+
 #count_num{
-    font-family: SummerSunshine;
+    font-family: myFirstFont;
     vertical-align: middle;
     color: red;
+    position: absolute;
+    z-index: 1000;
+    font-size: 10em;
+    left: 48%;
+    top: 30%;
 }
 #startbutton {
-    background: blue;
+    background: #340a22;
     border: none;
     color: #fff;
     margin: 100px 20px 20px 20px;
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 4em;
+    display: block;
+    position: absolute;
+    bottom: 6%;
+    left: 38%;
 }
 #container {
     overflow: hidden;
@@ -36,9 +50,17 @@ video, canvas, img, #startbutton {
     margin: 20px auto;
 }
 #video{
-    height: 560px;
-    width:750px;
+    height: 73%;
+    width:61%;
     border-radius: 10px;
+    margin-left: 19.5%;
+}
+video{
+    height: 100%;
+    width: 100%;
+}
+#canvas{
+    visibility: hidden;
 }
 
 

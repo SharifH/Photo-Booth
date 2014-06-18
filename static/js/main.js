@@ -106,7 +106,7 @@
                     return parseInt(html) - 1;
                 } else {
                     clearTimeout(timer);
-                    return "Enjoy!";
+                    return "0";
 
                 }
             });
