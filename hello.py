@@ -1,7 +1,7 @@
 import dropbox
 import re
 import uuid
-from flask import Flask, request, jsonify, session, redirect, url_for
+from flask import Flask, request, jsonify, session, redirect, url_for, abort
 
 from dropbox.client import DropboxClient, DropboxOAuth2Flow, DropboxOAuth2FlowNoRedirect
 from dropbox.rest import ErrorResponse, RESTSocketError
@@ -46,7 +46,8 @@ def dropbox_auth_start():
 def dropbox_auth_finish():
     try:
         access_token, user_id, url_state = get_auth_flow().finish(request.args)
-    except:
+    except Exception as e:
+        print e
         abort(400)
     else:
         session['access_token'] = access_token
